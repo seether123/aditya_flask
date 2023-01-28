@@ -1,0 +1,29 @@
+# flask_mango_order.py
+from flask import Flask, request, render_template
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\jhaaditya289\\Desktop\\test.db'
+db = SQLAlchemy(app)
+
+class MangoOrder(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    num_mangos = db.Column(db.Integer)
+
+@app.route('/')
+def index():
+    return render_template('mango.txt')
+
+@app.route('/order', methods=['POST'])
+def order():
+    num_mangos = request.form['num_mangos']
+    order = MangoOrder(num_mangos=num_mangos)
+    db.session.add(order)
+    db.session.commit()
+    return render_template('success.txt', num_mangos=num_mangos)
+
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
+
