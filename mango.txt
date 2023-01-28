@@ -1,0 +1,29 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mango Order</title>
+</head>
+<body>
+    <h1>Order Mangos</h1>
+    <form action="/order" method="post">
+        <label for="num_mangos">Number of Mangos:</label>
+        <input type="number" id="num_mangos" name="num_mangos">
+        <input type="submit" value="Order">
+    </form>
+</body>
+</html>
+
+
+-------
+success html file
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+</head>
+<body>
+    <h1>Order Received!</h1>
+    <p>You ordered {{ num_mangos }} mangos.</p>
+</body>
+</html>
